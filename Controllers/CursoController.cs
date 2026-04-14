@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using PlataformaCursosOnline.Models;
 using PlataformaCursosOnline.Services;
 using PlataformaCursosOnline.Singleton;
 
@@ -40,6 +41,46 @@ public class CursoController : Controller
         ViewBag.Matriculado = _cursoService.EstaMatriculado(id);
         ViewBag.Logado = _sessao.EstaLogado();
         return View(curso);
+    }
+
+    // GET /Curso/Criar
+    public IActionResult Criar()
+    {
+        if (!_sessao.EstaLogado())
+            return RedirectToAction("Login", "Usuario", new { returnUrl = "/Curso/Criar" });
+
+        return View(new CriarCursoViewModel());
+    }
+
+    // POST /Curso/Criar
+    [HttpPost]
+    public IActionResult Criar(CriarCursoViewModel vm)
+    {
+        if (!_sessao.EstaLogado())
+            return RedirectToAction("Login", "Usuario");
+
+        // Validação manual simples (sem DataAnnotations para não alterar a estrutura)
+        if (string.IsNullOrWhiteSpace(vm.Nome))
+            ModelState.AddModelError(nameof(vm.Nome), "O nome do curso é obrigatório.");
+
+        if (vm.CargaHoraria <= 0)
+            ModelState.AddModelError(nameof(vm.CargaHoraria), "A carga horária deve ser maior que zero.");
+
+        if (vm.Tipo != "Video" && vm.Tipo != "AoVivo")
+            ModelState.AddModelError(nameof(vm.Tipo), "Selecione um tipo válido.");
+
+        if (!ModelState.IsValid)
+            return View(vm);
+
+        // Factory Method em ação: dependendo do tipo, a factory correta é chamada
+        ICurso novoCurso = vm.Tipo == "AoVivo"
+            ? _cursoService.CriarCursoAoVivo(vm.Nome, vm.CargaHoraria)
+            : _cursoService.CriarCursoVideo(vm.Nome, vm.CargaHoraria);
+
+        TempData["Mensagem"] = $"Curso \"{novoCurso.GetNome()}\" criado com sucesso!";
+        TempData["Tipo"] = "sucesso";
+
+        return RedirectToAction(nameof(Detalhes), new { id = novoCurso.GetId() });
     }
 
     // POST /Curso/Matricular

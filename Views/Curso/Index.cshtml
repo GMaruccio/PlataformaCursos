@@ -11,6 +11,10 @@
     <p>@Model.Count curso(s) encontrado(s)</p>
 </div>
 
+<div style="display:flex;justify-content:flex-end;margin-bottom:.5rem">
+    <a asp-controller="Curso" asp-action="Criar" class="btn-primary">＋ Criar Curso</a>
+</div>
+
 <form method="get" action="/Curso">
     <div class="filter-bar">
         <input type="text" name="busca" value="@busca" placeholder="🔍 Buscar curso..." />

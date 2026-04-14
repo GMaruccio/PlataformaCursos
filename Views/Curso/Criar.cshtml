@@ -1,0 +1,161 @@
+@model PlataformaCursosOnline.Models.CriarCursoViewModel
+@{
+    ViewData["Title"] = "Criar Novo Curso";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h1>Criar Novo Curso</h1>
+    <p>O tipo escolhido determina qual <strong>Factory</strong> será usada para instanciar o curso.</p>
+</div>
+
+<div class="detail-wrap" style="max-width:560px">
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="toast toast-danger" style="position:static;margin-bottom:1.5rem">
+            @foreach (var entry in ViewData.ModelState.Values)
+            {
+                @foreach (var err in entry.Errors)
+                {
+                    <div>⚠ @err.ErrorMessage</div>
+                }
+            }
+        </div>
+    }
+
+    <form asp-action="Criar" method="post" class="criar-form">
+
+        @* Nome *@
+        <div class="form-group">
+            <label for="Nome">Nome do Curso</label>
+            <input id="Nome"
+                   name="Nome"
+                   type="text"
+                   class="form-control"
+                   value="@Model.Nome"
+                   placeholder="Ex.: Clean Architecture com .NET 8"
+                   autocomplete="off" />
+        </div>
+
+        @* Carga Horária *@
+        <div class="form-group">
+            <label for="CargaHoraria">Carga Horária (horas)</label>
+            <input id="CargaHoraria"
+                   name="CargaHoraria"
+                   type="number"
+                   class="form-control"
+                   value="@(Model.CargaHoraria == 0 ? "" : Model.CargaHoraria.ToString())"
+                   placeholder="Ex.: 30"
+                   min="1"
+                   max="999" />
+        </div>
+
+        @* Tipo / Factory *@
+        <div class="form-group">
+            <label>Tipo do Curso <span style="opacity:.5;font-size:.8rem">(escolha a Factory)</span></label>
+            <div class="tipo-selector">
+                <label class="tipo-option @(Model.Tipo == "Video" ? "selected" : "")">
+                    <input type="radio" name="Tipo" value="Video"
+                           @(Model.Tipo == "Video" ? "checked" : "") />
+                    <span class="tipo-icon">▶</span>
+                    <span class="tipo-label">Vídeo</span>
+                    <span class="tipo-desc">Usa a <code>VideoFactory</code><br/>Cria um <code>CursoVideo</code></span>
+                </label>
+
+                <label class="tipo-option @(Model.Tipo == "AoVivo" ? "selected" : "")">
+                    <input type="radio" name="Tipo" value="AoVivo"
+                           @(Model.Tipo == "AoVivo" ? "checked" : "") />
+                    <span class="tipo-icon">🔴</span>
+                    <span class="tipo-label">Ao Vivo</span>
+                    <span class="tipo-desc">Usa a <code>AoVivoFactory</code><br/>Cria um <code>CursoAoVivo</code></span>
+                </label>
+            </div>
+        </div>
+
+
+        <div class="detail-actions">
+            <button type="submit" class="btn-primary">Criar Curso</button>
+            <a asp-action="Index" class="btn-ghost">← Cancelar</a>
+        </div>
+    </form>
+</div>
+
+<style>
+.criar-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    margin-bottom: 1.25rem;
+}
+.criar-form label {
+    font-weight: 600;
+    font-size: .9rem;
+    color: var(--text);
+}
+.criar-form .form-control {
+    padding: .65rem .9rem;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color .2s;
+    outline: none;
+}
+.criar-form .form-control:focus {
+    border-color: var(--accent);
+}
+
+/* Tipo selector */
+.tipo-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .75rem;
+}
+.tipo-option {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .3rem;
+    padding: 1.1rem .75rem;
+    border-radius: 12px;
+    border: 2px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+    text-align: center;
+}
+.tipo-option input[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.tipo-option.selected,
+.tipo-option:has(input:checked) {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+}
+.tipo-icon { font-size: 1.6rem; }
+.tipo-label { font-weight: 700; font-size: .95rem; }
+.tipo-desc  { font-size: .75rem; opacity: .65; line-height: 1.4; }
+.tipo-desc code {
+    background: var(--surface-alt, #0001);
+    border-radius: 4px;
+    padding: 0 3px;
+    font-size: .72rem;
+}
+</style>
+
+<script>
+// Atualiza visual ao clicar nas opções
+document.querySelectorAll('.tipo-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+        document.querySelectorAll('.tipo-option').forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+    });
+});
+</script>
