@@ -1,0 +1,68 @@
+@{
+    ViewData["Title"] = "Perfil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var usuario = ViewBag.Usuario as PlataformaCursosOnline.Models.Usuario;
+    var meusCursos = ViewBag.MeusCursos as List<PlataformaCursosOnline.Models.ICurso> ?? new();
+    int totalHoras = ViewBag.TotalHoras;
+}
+
+<div class="perfil-wrap">
+    <div class="perfil-header">
+        <div class="perfil-avatar">@usuario!.GetNome().Substring(0,1).ToUpper()</div>
+        <div class="perfil-info">
+            <h2>@usuario.GetNome()</h2>
+            <span class="badge badge-@usuario.GetNivel().ToLower()">@usuario.GetNivel()</span>
+        </div>
+    </div>
+
+    <div class="perfil-stats">
+        <div class="ps-item">
+            <span class="ps-num">@meusCursos.Count</span>
+            <span class="ps-label">Cursos</span>
+        </div>
+        <div class="ps-item">
+            <span class="ps-num">@totalHoras<small style="font-size:1rem">h</small></span>
+            <span class="ps-label">Total Horas</span>
+        </div>
+        <div class="ps-item">
+            <span class="ps-num">@meusCursos.Count(c => c.GetTipo() == "Ao Vivo")</span>
+            <span class="ps-label">Ao Vivo</span>
+        </div>
+    </div>
+
+    <div class="section-header" style="margin-bottom:1.5rem">
+        <h2>Meus <span>cursos</span></h2>
+        <a asp-controller="Curso" asp-action="Index" class="btn-ghost">Explorar mais →</a>
+    </div>
+
+    @if (!meusCursos.Any())
+    {
+        <div class="empty-state">
+            <span class="icon">📚</span>
+            <h3>Nenhum curso ainda</h3>
+            <p>Explore o catálogo e comece sua jornada!</p>
+            <a asp-controller="Curso" asp-action="Index" class="btn-primary" style="margin-top:1rem">Explorar cursos</a>
+        </div>
+    }
+    else
+    {
+        <div class="grid-3">
+            @foreach (var c in meusCursos)
+            {
+                <a class="card" asp-controller="Curso" asp-action="Detalhes" asp-route-id="@c.GetId()">
+                    <span class="card-tipo @(c.GetTipo() == "Ao Vivo" ? "live" : "video")">
+                        @(c.GetTipo() == "Ao Vivo" ? "🔴 Ao Vivo" : "▶ Vídeo")
+                    </span>
+                    <div class="card-nome">@c.GetNome()</div>
+                    <div class="card-meta"><span>⏱ @c.GetCargaHoraria()h</span></div>
+                </a>
+            }
+        </div>
+    }
+
+    <div style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--border)">
+        <form asp-controller="Usuario" asp-action="Logout" method="post">
+            <button type="submit" class="btn-danger">Sair da conta</button>
+        </form>
+    </div>
+</div>

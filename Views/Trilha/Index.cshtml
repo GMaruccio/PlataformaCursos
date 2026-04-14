@@ -1,0 +1,45 @@
+@model List<PlataformaCursosOnline.Models.Trilha>
+@{
+    ViewData["Title"] = "Trilhas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h1>Trilhas de Aprendizagem</h1>
+    <p>Percursos curados para guiar sua evolução do início ao topo.</p>
+</div>
+
+<div class="section" style="padding-top:0">
+    <div class="grid-2">
+        @foreach (var t in Model)
+        {
+            <div class="trilha-card">
+                <span class="badge badge-@t.NivelAlvo.ToLower()">@t.NivelAlvo</span>
+                <h3>@t.Nome</h3>
+                <p>@t.Descricao</p>
+
+                <div class="trilha-pill-list">
+                    @foreach (var c in t.Cursos.Take(4))
+                    {
+                        <span class="trilha-pill">@c.GetNome()</span>
+                    }
+                    @if (t.Cursos.Count > 4)
+                    {
+                        <span class="trilha-pill">+@(t.Cursos.Count - 4) mais</span>
+                    }
+                </div>
+
+                <div class="card-meta" style="margin-bottom:1.25rem">
+                    <span>📚 @t.Cursos.Count cursos</span>
+                    <span>⏱ @t.TotalHoras horas</span>
+                    <span>🏷 @t.Cursos.Count(c => c.GetTipo() == "Ao Vivo") ao vivo</span>
+                </div>
+
+                <a asp-controller="Trilha" asp-action="Detalhes"
+                   asp-route-nivel="@t.NivelAlvo" class="btn-primary">
+                    Iniciar trilha
+                </a>
+            </div>
+        }
+    </div>
+</div>

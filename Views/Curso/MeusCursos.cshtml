@@ -1,0 +1,42 @@
+@model List<PlataformaCursosOnline.Models.ICurso>
+@{
+    ViewData["Title"] = "Meus Cursos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h1>Meus Cursos</h1>
+    <p>@Model.Count curso(s) matriculado(s) · @Model.Sum(c => c.GetCargaHoraria())h no total</p>
+</div>
+
+<div class="section" style="padding-top:0">
+    @if (!Model.Any())
+    {
+        <div class="empty-state">
+            <span class="icon">📚</span>
+            <h3>Nenhum curso ainda</h3>
+            <p>Explore o catálogo e matricule-se no seu primeiro curso!</p>
+            <a asp-controller="Curso" asp-action="Index" class="btn-primary" style="margin-top:1rem">Explorar cursos</a>
+        </div>
+    }
+    else
+    {
+        <div class="grid-3">
+            @foreach (var c in Model)
+            {
+                <div class="card">
+                    <span class="card-tipo @(c.GetTipo() == "Ao Vivo" ? "live" : "video")">
+                        @(c.GetTipo() == "Ao Vivo" ? "🔴 Ao Vivo" : "▶ Vídeo")
+                    </span>
+                    <div class="card-nome">@c.GetNome()</div>
+                    <div class="card-meta"><span>⏱ @c.GetCargaHoraria()h</span></div>
+                    <div class="card-actions">
+                        <a asp-action="Detalhes" asp-route-id="@c.GetId()" class="btn-outline" style="font-size:.82rem">
+                            Ver detalhes
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

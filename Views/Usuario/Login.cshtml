@@ -1,0 +1,45 @@
+@{
+    ViewData["Title"] = "Entrar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var returnUrl = ViewBag.ReturnUrl as string;
+}
+
+<div class="login-wrap">
+    <div class="login-box">
+        <span class="brand-icon" style="font-size:2rem">⬡</span>
+        <h2 style="margin-top:.5rem">Bem-vindo(a)</h2>
+        <p>Entre na plataforma para acessar seus cursos.</p>
+
+        @if (ViewBag.Erro != null)
+        {
+            <div class="toast toast-erro" style="position:static;margin-bottom:1rem;box-shadow:none">
+                @ViewBag.Erro
+            </div>
+        }
+
+        <form method="post" action="/Usuario/Login">
+            <input type="hidden" name="returnUrl" value="@returnUrl" />
+
+            <div class="form-group">
+                <label for="nome">Seu nome</label>
+                <input type="text" id="nome" name="nome" placeholder="Ex: Ana, Carlos, Julia…" required autofocus />
+            </div>
+
+            <div class="form-group">
+                <label for="nivel">Nível</label>
+                <select id="nivel" name="nivel">
+                    <option value="Iniciante">🟢 Iniciante</option>
+                    <option value="Avançado">🔵 Avançado</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-primary btn-full" style="margin-top:1.25rem">
+                Entrar na plataforma
+            </button>
+        </form>
+
+        <p style="text-align:center;margin-top:1.25rem;font-size:.82rem;color:var(--text-muted)">
+            Nomes cadastrados: <strong>ana</strong>, <strong>carlos</strong>, <strong>julia</strong>, <strong>marcos</strong>
+        </p>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+@model PlataformaCursosOnline.Models.ICurso
+@{
+    ViewData["Title"] = Model.GetNome();
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool matriculado = ViewBag.Matriculado;
+    bool logado = ViewBag.Logado;
+    bool aoVivo = Model.GetTipo() == "Ao Vivo";
+}
+
+<div class="detail-wrap">
+    <div class="detail-tipo">
+        <span class="card-tipo @(aoVivo ? "live" : "video")">
+            @(aoVivo ? "🔴 Ao Vivo" : "▶ Vídeo")
+        </span>
+    </div>
+
+    <h1 class="detail-titulo">@Model.GetNome()</h1>
+
+    <div class="detail-meta">
+        <span>⏱ @Model.GetCargaHoraria() horas</span>
+        <span>📁 @Model.GetTipo()</span>
+        <span>🔑 ID: <code style="font-size:.75rem;opacity:.5">@Model.GetId()</code></span>
+    </div>
+
+    <div class="detail-actions">
+        @if (!logado)
+        {
+            <a asp-controller="Usuario" asp-action="Login"
+               asp-route-returnUrl="/Curso/Detalhes/@Model.GetId()"
+               class="btn-primary">Entrar para se matricular</a>
+        }
+        else if (matriculado)
+        {
+            <form asp-action="Desmatricular" method="post" style="display:inline">
+                <input type="hidden" name="id" value="@Model.GetId()" />
+                <button type="submit" class="btn-danger">Cancelar matrícula</button>
+            </form>
+            <a asp-controller="Curso" asp-action="MeusCursos" class="btn-outline">Meus cursos</a>
+        }
+        else
+        {
+            <form asp-action="Matricular" method="post" style="display:inline">
+                <input type="hidden" name="id" value="@Model.GetId()" />
+                <button type="submit" class="btn-primary">Matricular-se</button>
+            </form>
+        }
+        <a asp-controller="Curso" asp-action="Index" class="btn-ghost">← Voltar</a>
+    </div>
+
+    <div class="info-box">
+        <h3>O que você vai aprender</h3>
+        <ul class="info-list">
+            @if (aoVivo)
+            {
+                <li>Interação em tempo real com instrutores</li>
+                <li>Resolução de dúvidas ao vivo</li>
+                <li>Networking com outros alunos</li>
+                <li>Sessão gravada disponível após o evento</li>
+            }
+            else
+            {
+                <li>Conteúdo gravado disponível a qualquer hora</li>
+                <li>Exercícios práticos e projetos reais</li>
+                <li>Material de apoio incluso</li>
+                <li>Certificado de conclusão</li>
+            }
+            <li>Carga horária: @Model.GetCargaHoraria()h de conteúdo</li>
+        </ul>
+    </div>
+</div>

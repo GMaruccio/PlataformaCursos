@@ -1,0 +1,92 @@
+@{
+    ViewData["Title"] = "Início";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cursos  = ViewBag.Cursos  as List<PlataformaCursosOnline.Models.ICurso>  ?? new();
+    var trilhas = ViewBag.Trilhas as List<PlataformaCursosOnline.Models.Trilha> ?? new();
+    var usuario = ViewBag.Usuario as PlataformaCursosOnline.Models.Usuario;
+}
+
+<!-- HERO -->
+<section class="hero">
+    <span class="hero-label">🚀 Plataforma de Cursos Online</span>
+    <h1>
+        Aprenda. Evolua.<br/>
+        <em>Domine seu caminho.</em>
+    </h1>
+    <p>
+        Do zero ao avançado em programação e tecnologia.<br/>
+        Cursos em vídeo, aulas ao vivo e trilhas personalizadas para o seu nível.
+    </p>
+    <div class="hero-actions">
+        <a asp-controller="Curso" asp-action="Index" class="btn-primary">Explorar cursos</a>
+        <a asp-controller="Trilha" asp-action="Index" class="btn-outline">Ver trilhas</a>
+    </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+    <div class="stat">
+        <span class="stat-num">@ViewBag.TotalCursos</span>
+        <span class="stat-label">Cursos</span>
+    </div>
+    <div class="stat">
+        <span class="stat-num">@ViewBag.TotalHoras<small style="font-size:1rem">h</small></span>
+        <span class="stat-label">Horas de Conteúdo</span>
+    </div>
+    <div class="stat">
+        <span class="stat-num">2</span>
+        <span class="stat-label">Trilhas</span>
+    </div>
+    <div class="stat">
+        <span class="stat-num">∞</span>
+        <span class="stat-label">Possibilidades</span>
+    </div>
+</div>
+
+<!-- CURSOS EM DESTAQUE -->
+<section class="section">
+    <div class="section-header">
+        <h2>Cursos em <span>destaque</span></h2>
+        <a asp-controller="Curso" asp-action="Index" class="btn-ghost">Ver todos →</a>
+    </div>
+    <div class="grid-3">
+        @foreach (var c in cursos)
+        {
+            <a class="card" asp-controller="Curso" asp-action="Detalhes" asp-route-id="@c.GetId()">
+                <span class="card-tipo @(c.GetTipo() == "Ao Vivo" ? "live" : "video")">
+                    @(c.GetTipo() == "Ao Vivo" ? "🔴 Ao Vivo" : "▶ Vídeo")
+                </span>
+                <div class="card-nome">@c.GetNome()</div>
+                <div class="card-meta">
+                    <span>⏱ @c.GetCargaHoraria()h</span>
+                    <span>@c.GetTipo()</span>
+                </div>
+            </a>
+        }
+    </div>
+</section>
+
+<!-- TRILHAS -->
+<section class="section">
+    <div class="section-header">
+        <h2>Trilhas de <span>aprendizagem</span></h2>
+        <a asp-controller="Trilha" asp-action="Index" class="btn-ghost">Ver todas →</a>
+    </div>
+    <div class="grid-2">
+        @foreach (var t in trilhas)
+        {
+            <div class="trilha-card">
+                <span class="badge badge-@t.NivelAlvo.ToLower()">@t.NivelAlvo</span>
+                <h3>@t.Nome</h3>
+                <p>@t.Descricao</p>
+                <div class="card-meta">
+                    <span>📚 @t.Cursos.Count cursos</span>
+                    <span>⏱ @t.TotalHoras horas</span>
+                </div>
+                <a asp-controller="Trilha" asp-action="Detalhes" asp-route-nivel="@t.NivelAlvo" class="btn-outline" style="margin-top:1rem;">
+                    Ver trilha
+                </a>
+            </div>
+        }
+    </div>
+</section>

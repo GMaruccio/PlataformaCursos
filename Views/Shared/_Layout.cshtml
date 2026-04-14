@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] — DevPath</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+
+<nav class="navbar">
+    <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+        <span class="brand-icon">⬡</span> DevPath
+    </a>
+    <ul class="navbar-links">
+        <li><a asp-controller="Home" asp-action="Index">Início</a></li>
+        <li><a asp-controller="Curso" asp-action="Index">Cursos</a></li>
+        <li><a asp-controller="Trilha" asp-action="Index">Trilhas</a></li>
+        @if (Context.Request.Path.StartsWithSegments("/Usuario") == false)
+        {
+            <li>
+                @{
+                    var sessao = PlataformaCursosOnline.Singleton.GerenciadorSessao.GetInstancia();
+                }
+                @if (sessao.EstaLogado())
+                {
+                    <div class="nav-user">
+                        <a asp-controller="Usuario" asp-action="Perfil" class="nav-avatar">
+                            @sessao.GetUsuarioAtual()!.GetNome().Substring(0, 1).ToUpper()
+                        </a>
+                        <form asp-controller="Usuario" asp-action="Logout" method="post" style="display:inline">
+                            <button type="submit" class="btn-ghost">Sair</button>
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <a asp-controller="Usuario" asp-action="Login" class="btn-primary">Entrar</a>
+                }
+            </li>
+        }
+    </ul>
+</nav>
+
+@if (TempData["Mensagem"] != null)
+{
+    <div class="toast toast-@TempData["Tipo"]">
+        @TempData["Mensagem"]
+    </div>
+}
+
+<main>
+    @RenderBody()
+</main>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <span class="brand-icon">⬡</span> <strong>DevPath</strong>
+        <span class="footer-sep">·</span>
+        Plataforma de Cursos Online
+        <span class="footer-sep">·</span>
+        Arquitetura MVC + SOLID + Design Patterns
+    </div>
+</footer>
+
+<script src="~/js/site.js"></script>
+</body>
+</html>

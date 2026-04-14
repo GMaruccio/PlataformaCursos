@@ -1,0 +1,228 @@
+{
+  "Version": 1,
+  "Hash": "hi2CLDcMwOfAO3Cpyf9R6cs8RZXKyQ0lKhoqHHQEO2g=",
+  "Source": "PlataformaCursosOnline",
+  "BasePath": "_content/PlataformaCursosOnline",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "PlataformaCursosOnline\\wwwroot",
+      "Source": "PlataformaCursosOnline",
+      "ContentRoot": "D:\\Documentos\\PlataformaCursos\\wwwroot\\",
+      "BasePath": "_content/PlataformaCursosOnline",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\Documentos\\PlataformaCursos\\wwwroot\\css\\site.css",
+      "SourceId": "PlataformaCursosOnline",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Documentos\\PlataformaCursos\\wwwroot\\",
+      "BasePath": "_content/PlataformaCursosOnline",
+      "RelativePath": "css/site#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "zmectz817f",
+      "Integrity": "Gz7e9d8w51NzB9gYiw/w7ZHvFAiL9OU8L186caLfquY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "D:\\Documentos\\PlataformaCursos\\wwwroot\\js\\site.js",
+      "SourceId": "PlataformaCursosOnline",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Documentos\\PlataformaCursos\\wwwroot\\",
+      "BasePath": "_content/PlataformaCursosOnline",
+      "RelativePath": "js/site#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "edgd8v2d52",
+      "Integrity": "ItiUN2R37Bo3zScFHzF886APL/Lm3znqx9+Gke7WJzs=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\site.js"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "css/site.css",
+      "AssetFile": "D:\\Documentos\\PlataformaCursos\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16981"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Gz7e9d8w51NzB9gYiw/w7ZHvFAiL9OU8L186caLfquY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 10 Apr 2026 18:23:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Gz7e9d8w51NzB9gYiw/w7ZHvFAiL9OU8L186caLfquY="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.zmectz817f.css",
+      "AssetFile": "D:\\Documentos\\PlataformaCursos\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16981"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Gz7e9d8w51NzB9gYiw/w7ZHvFAiL9OU8L186caLfquY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 10 Apr 2026 18:23:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zmectz817f"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Gz7e9d8w51NzB9gYiw/w7ZHvFAiL9OU8L186caLfquY="
+        }
+      ]
+    },
+    {
+      "Route": "js/site.edgd8v2d52.js",
+      "AssetFile": "D:\\Documentos\\PlataformaCursos\\wwwroot\\js\\site.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "228"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ItiUN2R37Bo3zScFHzF886APL/Lm3znqx9+Gke7WJzs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 10 Apr 2026 18:23:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "edgd8v2d52"
+        },
+        {
+          "Name": "label",
+          "Value": "js/site.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ItiUN2R37Bo3zScFHzF886APL/Lm3znqx9+Gke7WJzs="
+        }
+      ]
+    },
+    {
+      "Route": "js/site.js",
+      "AssetFile": "D:\\Documentos\\PlataformaCursos\\wwwroot\\js\\site.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "228"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ItiUN2R37Bo3zScFHzF886APL/Lm3znqx9+Gke7WJzs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 10 Apr 2026 18:23:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ItiUN2R37Bo3zScFHzF886APL/Lm3znqx9+Gke7WJzs="
+        }
+      ]
+    }
+  ]
+}

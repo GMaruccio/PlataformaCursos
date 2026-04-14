@@ -1,0 +1,33 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Documentos\\PlataformaCursos\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "D:\\Documentos\\PlataformaCursos\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.PlataformaCursosOnline.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.PlataformaCursosOnline.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.PlataformaCursosOnline.props",
+      "PackagePath": "build\\PlataformaCursosOnline.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.PlataformaCursosOnline.props",
+      "PackagePath": "buildMultiTargeting\\PlataformaCursosOnline.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.PlataformaCursosOnline.props",
+      "PackagePath": "buildTransitive\\PlataformaCursosOnline.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

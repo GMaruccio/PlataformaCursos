@@ -1,0 +1,57 @@
+@model PlataformaCursosOnline.Models.Trilha
+@{
+    ViewData["Title"] = Model.Nome;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool logado = ViewBag.Logado;
+}
+
+<div class="detail-wrap">
+    <span class="badge badge-@Model.NivelAlvo.ToLower()" style="margin-bottom:1rem;display:inline-block">@Model.NivelAlvo</span>
+    <h1 class="detail-titulo">@Model.Nome</h1>
+    <p style="color:var(--text-muted);margin-bottom:1.5rem;font-size:1rem">@Model.Descricao</p>
+
+    <div class="detail-meta">
+        <span>📚 @Model.Cursos.Count cursos</span>
+        <span>⏱ @Model.TotalHoras horas totais</span>
+        <span>🔴 @Model.Cursos.Count(c => c.GetTipo() == "Ao Vivo") aulas ao vivo</span>
+    </div>
+
+    <div style="margin-bottom:2rem">
+        @if (!logado)
+        {
+            <a asp-controller="Usuario" asp-action="Login" class="btn-primary">Entrar para iniciar</a>
+        }
+        else
+        {
+            <a asp-controller="Curso" asp-action="MeusCursos" class="btn-primary">Meus cursos</a>
+        }
+        <a asp-controller="Trilha" asp-action="Index" class="btn-ghost" style="margin-left:.75rem">← Trilhas</a>
+    </div>
+
+    <!-- LISTA DE CURSOS DA TRILHA -->
+    <div class="info-box">
+        <h3>Cursos desta trilha</h3>
+        <div style="display:flex;flex-direction:column;gap:.75rem;margin-top:1rem">
+            @for (int i = 0; i < Model.Cursos.Count; i++)
+            {
+                var c = Model.Cursos[i];
+                <a class="card" asp-controller="Curso" asp-action="Detalhes" asp-route-id="@c.GetId()"
+                   style="flex-direction:row;align-items:center;gap:1rem;padding:1rem 1.25rem;">
+                    <span style="font-family:var(--font-head);font-size:1.3rem;font-weight:800;color:var(--accent);min-width:32px">
+                        @(i + 1)
+                    </span>
+                    <div style="flex:1">
+                        <div class="card-nome" style="font-size:.95rem">@c.GetNome()</div>
+                        <div class="card-meta">
+                            <span class="card-tipo @(c.GetTipo() == "Ao Vivo" ? "live" : "video")" style="padding:.15rem .5rem">
+                                @(c.GetTipo() == "Ao Vivo" ? "🔴 Ao Vivo" : "▶ Vídeo")
+                            </span>
+                            <span>⏱ @c.GetCargaHoraria()h</span>
+                        </div>
+                    </div>
+                    <span style="color:var(--text-muted);font-size:1.1rem">→</span>
+                </a>
+            }
+        </div>
+    </div>
+</div>
